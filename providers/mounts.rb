@@ -59,7 +59,7 @@ action :ensure_exists do
   end
 
   # make sure we have a "path"
-  Chef::Resource::Directory(path) do
+  Chef::Directory(path) do
     owner node['openstack']['object-storage']['user']
     group node['openstack']['object-storage']['group']
     recursive true
@@ -116,7 +116,7 @@ action :ensure_exists do
 
     mount_path = "#{path}/#{info['mountpoint']}"
 
-    Chef::Resource::Directory(mount_path) do
+    Chef::Directory(mount_path) do
       owner node['openstack']['object-storage']['user']
       group node['openstack']['object-storage']['group']
       recursive true

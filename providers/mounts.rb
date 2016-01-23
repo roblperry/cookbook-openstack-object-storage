@@ -23,6 +23,8 @@
 require 'chef/util/file_edit'
 require 'pp'
 
+require 'chef/resource/directory'
+
 action :ensure_exists do
   proposed_devices = @new_resource.devices
   fsck = @new_resource.pass

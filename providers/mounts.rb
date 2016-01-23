@@ -23,8 +23,6 @@
 require 'chef/util/file_edit'
 require 'pp'
 
-require 'chef/resource/directory'
-
 action :ensure_exists do
   proposed_devices = @new_resource.devices
   fsck = @new_resource.pass
@@ -59,7 +57,7 @@ action :ensure_exists do
   end
 
   # make sure we have a "path"
-  Chef::Directory(path) do
+  directory path do
     owner node['openstack']['object-storage']['user']
     group node['openstack']['object-storage']['group']
     recursive true
@@ -116,7 +114,7 @@ action :ensure_exists do
 
     mount_path = "#{path}/#{info['mountpoint']}"
 
-    Chef::Directory(mount_path) do
+    directory mount_path do
       owner node['openstack']['object-storage']['user']
       group node['openstack']['object-storage']['group']
       recursive true

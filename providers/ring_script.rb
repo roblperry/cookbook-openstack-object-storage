@@ -70,6 +70,9 @@ def generate_script # rubocop:disable Metrics/AbcSize
     role = node['openstack']['object-storage']["#{which}_server_chef_role"]
     disk_state = Chef::Search::Query.new.search(:node, "chef_environment:#{node.chef_environment} AND roles:#{role}")
     Chef::Log.info("#{which} node count: #{disk_state.count} for role: #{role}")
+    disk_state.each do |swiftnode|
+      Chef::Log.info("#{which} node: #{swiftnode[:hostname]}")
+    end
 
     # for a running track of available disks
     disk_data[:available] ||= {}

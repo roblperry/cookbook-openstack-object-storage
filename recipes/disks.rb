@@ -60,7 +60,7 @@ end
 disk_ip = locate_ip_in_cidr(node['openstack']['object-storage']['network']['object-cidr'], node)
 
 partitions = disks.map { |x| "#{x}1" }
-partitions += node['openstack']['object-storage']['paritions']
+partitions += eval node['openstack']['object-storage']['partition_enum_expr']
 partitions.uniq!
 
 openstack_object_storage_mounts '/srv/node' do

@@ -280,7 +280,7 @@ default['openstack']['object-storage']['disk_test_filter'] = [
   "not system('/sbin/parted /dev/' + candidate + ' -s print | grep linux-swap')",
   "not info.has_key?('removable') or info['removable'] == 0.to_s"]
 
-default['openstack']['object-storage']['paritions'] = []
+default['openstack']['object-storage']['partition_enum_expr'] = "[]"
 
 #-------------------
 # template overrides

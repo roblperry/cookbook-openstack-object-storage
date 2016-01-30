@@ -63,6 +63,8 @@ partitions = disks.map { |x| "#{x}1" }
 partitions += eval node['openstack']['object-storage']['partition_enum_expr']
 partitions.uniq!
 
+Chef::Log.info("Partitions: #{partitions}")
+
 openstack_object_storage_mounts '/srv/node' do
   action :ensure_exists
   publish_attributes 'swift/state/devs'

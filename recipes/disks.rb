@@ -59,10 +59,14 @@ end
 # for all object/container/account services are on the same net
 disk_ip = locate_ip_in_cidr(node['openstack']['object-storage']['network']['object-cidr'], node)
 
+partitions = disks.map { |x| "#{x}1" }
+partitions += node['openstack']['object-storage']['paritions']
+partitions.uniq!
+
 openstack_object_storage_mounts '/srv/node' do
   action :ensure_exists
   publish_attributes 'swift/state/devs'
-  devices disks.map { |x| "#{x}1" }
+  devices partitions
   ip disk_ip
   format platform_options['disk_format']
 end
